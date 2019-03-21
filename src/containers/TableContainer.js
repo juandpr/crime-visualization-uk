@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { clearTable } from '../actions'
-import Table from '../components/Table'
+import CrimeTable from '../components/CrimeTable'
 
 const mapStateToProps = (state) => {
   return {
@@ -19,6 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 const TableContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Table);
+)(CrimeTable);
 
 export default TableContainer;
