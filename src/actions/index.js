@@ -17,9 +17,11 @@ export const clearTable = () => ({
   type: 'CLEAR_TABLE'
 });
 
-export const search = (crimeType, force, month) => ({
-  type: 'SEARCH',
-  crimeType,
-  force,
-  month
+export const requestCrimes = () => ({
+  type: 'REQUEST_CRIMES'
+});
+
+export const receiveCrimes = (crimes) => ({
+  type: 'RECEIVE_CRIMES',
+  crimes: crimes.data
 });

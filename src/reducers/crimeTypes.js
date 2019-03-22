@@ -1,9 +1,10 @@
 const crimeTypes = (state = [], action) => {
   switch (action.type) {
     case 'RECEIVE_CRIME_TYPES':
-      state = action.crimeTypes;
+      return action.crimeTypes;
+    default:
+      return state;
   }
-  return state;
 }
 
 export default crimeTypes;

@@ -1,9 +1,10 @@
 const months = (state = [], action) => {
   switch (action.type) {
     case 'RECEIVE_MONTHS':
-      state = action.months;
+      return action.months;
+    default:
+      return state;
   }
-  return state;
 }
 
 export default months;

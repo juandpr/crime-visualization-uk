@@ -1,9 +1,10 @@
 const forces = (state = [], action) => {
   switch (action.type) {
     case 'RECEIVE_FORCES':
-      state = action.forces;
+      return action.forces;
+    default:
+      return state;
   }
-  return state;
 }
 
 export default forces;

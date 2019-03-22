@@ -4,13 +4,14 @@ import CrimeTable from '../components/CrimeTable'
 
 const mapStateToProps = (state) => {
   return {
-    crimes: state.crimes
+    crimes: state.crimes,
+    isFetching: state.isFetching
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClear: () => {
+    clearTable: () => {
       dispatch(clearTable())
     }
   }

@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
-import { Collapse, Nav, Navbar, NavItem, Input } from 'reactstrap';
-import { fetchCrimeTypes, fetchForces, fetchMonths } from '../api';
+import { Collapse, Nav, Navbar, NavItem, Input, Button } from 'reactstrap';
+import { fetchCrimeTypes, fetchForces, fetchMonths, fetchCrimes } from '../api';
 
 class Search extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selectedCrimeType: '',
+      selectedForce: '',
+      selectedMonth: ''
+    };
+
+    this.searchHandler = this.searchHandler.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
   componentDidMount() {
     fetchCrimeTypes().then((types) => {
       this.props.receiveCrimeTypes(types);
@@ -17,6 +29,42 @@ class Search extends Component {
     });
   }
 
+  searchHandler() {
+    let { selectedCrimeType, selectedForce, selectedMonth } = this.state;
+
+    if (!this.isFormValid(selectedCrimeType, selectedForce, selectedMonth)) {
+      alert('You must select a valid Crime Type, Police Force and Month.');
+      return false;
+    }
+
+    this.props.requestCrimes();
+
+    fetchCrimes(
+      this.state.selectedCrimeType,
+      this.state.selectedForce,
+      this.state.selectedMonth
+    ).then((crimes) => {
+      this.props.receiveCrimes(crimes);
+    });
+  }
+
+  isFormValid(crimeType, force, month) {
+    return crimeType && crimeType.length && force && force.length && month && month.length;
+  }
+
+  /**
+   * Triggered when any of the input changes
+   *
+   * @param {object} event
+   */
+  handleInputChange(event) {
+    let {name, value} = event.target;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   render() {
     return (
       <div className="Search">
@@ -24,28 +72,32 @@ class Search extends Component {
           <Collapse navbar>
             <Nav navbar>
               <NavItem>
-                <Input type="select">
-                {this.props.crimeTypes.map((crimeType) => (
-                  <option key={crimeType.url} value={crimeType.url}>{crimeType.name}</option>
-                ))}
+                <Input type="select" name="selectedCrimeType" value={this.state.selectedCrimeType} onChange={this.handleInputChange}>
+                  <option>Crime Type</option>
+                  {this.props.crimeTypes.map((crimeType) => (
+                    <option key={crimeType.url} value={crimeType.url}>{crimeType.name}</option>
+                  ))}
                 </Input>
               </NavItem>
               <NavItem>
-                <Input type="select">
-                {this.props.forces.map((force) => (
-                  <option key={force.id} value={force.id}>{force.name}</option>
-                ))}
+                <Input type="select" name="selectedForce" value={this.state.selectedForce} onChange={this.handleInputChange}>
+                  <option>Police Force</option>
+                  {this.props.forces.map((force) => (
+                    <option key={force.id} value={force.id}>{force.name}</option>
+                  ))}
                 </Input>
               </NavItem>
               <NavItem>
-                <Input type="select">
-                {this.props.months.map((month) => (
-                  <option key={month.id} value={month.id}>{month.name}</option>
-                ))}
+                <Input type="select" name="selectedMonth" value={this.state.selectedMonth} onChange={this.handleInputChange}>
+                  <option>Month</option>
+                  {this.props.months.map((month) => (
+                    <option key={month.id} value={month.id}>{month.name}</option>
+                  ))}
                 </Input>
               </NavItem>
             </Nav>
           </Collapse>
+          <Button onClick={this.searchHandler}>Search</Button>
         </Navbar>
       </div>
     );
