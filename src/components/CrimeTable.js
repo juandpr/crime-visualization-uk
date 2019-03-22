@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 
 class CrimeTable extends Component {
+  constructor() {
+    super();
+
+    this.clearTable = this.clearTable.bind(this);
+  }
+
+  clearTable(event) {
+    event.preventDefault();
+    this.props.clearTable();
+  }
+
   render() {
     return (
       <div className="CrimeTable">
-        <h2>Search Results <a href onClick={this.props.clearTable()}>(Clear)</a></h2>
+        <h2>Search Results <Button color="link" className="small" href="" onClick={this.clearTable}>(Clear)</Button></h2>
         {this.props.isFetching ? (
           <p>Loading...</p>
         ) : (
