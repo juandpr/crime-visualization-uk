@@ -25,3 +25,8 @@ export const receiveCrimes = (crimes) => ({
   type: 'RECEIVE_CRIMES',
   crimes: crimes.data
 });
+
+export const receiveCrimesError = (err) => ({
+  type: 'RECEIVE_CRIMES_ERROR',
+  error: err
+});

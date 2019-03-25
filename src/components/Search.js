@@ -45,6 +45,8 @@ class Search extends Component {
       this.state.selectedMonth
     ).then((crimes) => {
       this.props.receiveCrimes(crimes);
+    }).catch((err) => {
+      this.props.receiveCrimesError(err);
     });
   }
 

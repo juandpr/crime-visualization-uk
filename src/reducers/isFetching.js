@@ -4,6 +4,8 @@ const isFetching = (state = false, action) => {
       return true;
     case 'RECEIVE_CRIMES':
       return false;
+    case 'RECEIVE_CRIMES_ERROR':
+      return false;
     default:
       return state;
   }

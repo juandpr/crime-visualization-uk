@@ -5,10 +5,10 @@ class CrimeTable extends Component {
   constructor() {
     super();
 
-    this.clearTable = this.clearTable.bind(this);
+    this.clearTableHandler = this.clearTableHandler.bind(this);
   }
 
-  clearTable(event) {
+  clearTableHandler(event) {
     event.preventDefault();
     this.props.clearTable();
   }
@@ -16,7 +16,7 @@ class CrimeTable extends Component {
   render() {
     return (
       <div className="CrimeTable">
-        <h2>Search Results <Button color="link" className="small" href="" onClick={this.clearTable}>(Clear)</Button></h2>
+        <h2>Search Results <Button color="link" className="small" href="" onClick={this.clearTableHandler}>(Clear)</Button></h2>
         {this.props.isFetching ? (
           <p>Loading...</p>
         ) : (
@@ -29,13 +29,17 @@ class CrimeTable extends Component {
               </tr>
             </thead>
             <tbody>
-            {this.props.crimes.map((crime) => (
+            {this.props.crimes.length ? (this.props.crimes.map((crime) => (
               <tr key={crime.id}>
                 <td>{crime.category}</td>
-                <td>{crime.outcome_status.category}</td>
-                <td>{crime.outcome_status.date}</td>
+                <td>{crime.outcome_status ? crime.outcome_status.category : ''}</td>
+                <td>{crime.outcome_status ? crime.outcome_status.date : ''}</td>
               </tr>
-            ))}
+            ))) : (
+              <tr>
+                <td colspan="3">No results.</td>
+              </tr>
+            )}
             </tbody>
           </Table>
         )}

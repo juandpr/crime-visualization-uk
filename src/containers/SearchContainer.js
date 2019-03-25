@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { receiveCrimeTypes, receiveForces, receiveMonths, requestCrimes, receiveCrimes } from '../actions'
+import { receiveCrimeTypes, receiveForces, receiveMonths, requestCrimes, receiveCrimes, receiveCrimesError } from '../actions'
 import Search from '../components/Search'
 
 const mapStateToProps = (state) => {
@@ -26,7 +26,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     receiveCrimes: (crimes) => {
       dispatch(receiveCrimes(crimes))
+    },
+    receiveCrimesError: (err) => {
+      dispatch(receiveCrimesError(err))
     }
+
   }
 }
 
