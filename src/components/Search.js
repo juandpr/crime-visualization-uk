@@ -29,6 +29,9 @@ class Search extends Component {
     });
   }
 
+  /**
+   * Triggered when the Search button is clicked
+   */
   searchHandler() {
     let { selectedCrimeType, selectedForce, selectedMonth } = this.state;
 
@@ -50,6 +53,14 @@ class Search extends Component {
     });
   }
 
+  /**
+   * Returns true if the values are not empty
+   *
+   * @param {string} crimeType
+   * @param {string} force
+   * @param {string} month
+   * @return boolean
+   */
   isFormValid(crimeType, force, month) {
     return crimeType !== '' && force !== '' && month !== '';
   }

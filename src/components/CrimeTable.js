@@ -8,6 +8,9 @@ class CrimeTable extends Component {
     this.clearTableHandler = this.clearTableHandler.bind(this);
   }
 
+  /**
+   * Triggered when the Clear button is clicked
+   */
   clearTableHandler(event) {
     event.preventDefault();
     this.props.clearTable();
