@@ -37,7 +37,7 @@ class CrimeTable extends Component {
               </tr>
             ))) : (
               <tr>
-                <td colspan="3">No results.</td>
+                <td colSpan="3">No results.</td>
               </tr>
             )}
             </tbody>

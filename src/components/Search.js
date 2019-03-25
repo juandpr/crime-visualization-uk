@@ -51,7 +51,7 @@ class Search extends Component {
   }
 
   isFormValid(crimeType, force, month) {
-    return crimeType && crimeType.length && force && force.length && month && month.length;
+    return crimeType !== '' && force !== '' && month !== '';
   }
 
   /**
